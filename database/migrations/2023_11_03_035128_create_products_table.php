@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('main_image');
             $table->string('second_image');
             $table->bigInteger('variant_id');
+            $table->bigInteger('sold');
             $table->softDeletes();
             $table->timestamps();
         });
