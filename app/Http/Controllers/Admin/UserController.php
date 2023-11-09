@@ -10,7 +10,7 @@ class UserController extends Controller implements ICRUD
     //
     public function list()
     {
-        return view('be.layout');
+
     }
 
     public function add(Request $request)

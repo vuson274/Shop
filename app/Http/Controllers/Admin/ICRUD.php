@@ -6,7 +6,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 interface ICRUD
 {
