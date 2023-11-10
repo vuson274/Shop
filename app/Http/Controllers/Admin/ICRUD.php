@@ -14,7 +14,7 @@ interface ICRUD
 
     public function add(Request $request);
 
-    public function edit($id,Request $request);
+    public function edit(Request $request);
 
     public function delete($id);
 }

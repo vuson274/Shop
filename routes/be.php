@@ -6,6 +6,7 @@
         Route::prefix('/user')->group(function (){
             Route::get('/',[AdminController::class, 'list'])->name('admin.user.list');
             Route::post('/add',[AdminController::class,'add'])->name('admin.user.add');
+            Route::post('/edit',[AdminController::class, 'edit'])->name('admin.user.edit');
         });
     });
 ?>

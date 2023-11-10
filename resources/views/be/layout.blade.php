@@ -20,6 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('/adminlte/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/adminlte/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
 </head>
 
@@ -432,6 +433,12 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{{asset('/adminlte/js/sb-admin-2.min.js')}}"></script>
+<script src="{{asset('/adminlte/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('/adminlte/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{asset('/adminlte/js/demo/datatables-demo.js')}}"></script>
+<script src="{{asset('/adminlte/js/myjs.js')}}"></script>
 
 </body>
 
