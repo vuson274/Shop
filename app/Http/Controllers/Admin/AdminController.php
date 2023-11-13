@@ -50,6 +50,11 @@ class AdminController extends Controller implements ICRUD
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        try {
+            Admin::where('id', $id)->delete();
+        }catch (Exception $exception){
+            return redirect()->back()->with('error','Xóa thất bại');
+        }
+        return redirect()->back()->with('success','Xoá thành công');
     }
 }
