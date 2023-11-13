@@ -21,6 +21,8 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('/adminlte/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{asset('/adminlte/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+
 
 </head>
 
@@ -439,6 +441,14 @@
 <!-- Page level custom scripts -->
 <script src="{{asset('/adminlte/js/demo/datatables-demo.js')}}"></script>
 <script src="{{asset('/adminlte/js/myjs.js')}}"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
 
 </body>
 

@@ -3,6 +3,7 @@
     use App\Http\Controllers\Admin\UserController;
     use App\Http\Controllers\Admin\AdminController;
     use App\Http\Controllers\Admin\CategoryController;
+    use App\Http\Controllers\Admin\ProductController;
     Route::prefix('/admin')->group(function (){
         Route::prefix('/user')->group(function (){
             Route::get('/',[AdminController::class, 'list'])->name('admin.user.list');
@@ -15,6 +16,12 @@
             Route::post('/add',[CategoryController::class,'add'])->name('admin.category.add');
             Route::post('/edit',[CategoryController::class, 'edit'])->name('admin.category.edit');
             Route::get('/delete/{id}', [CategoryController::class,'delete'])->name('admin.category.delete');
+        });
+        Route::prefix('/product')->group(function (){
+            Route::get('/',[ProductController::class, 'list'])->name('admin.product.list');
+            Route::post('/add',[ProductController::class,'add'])->name('admin.product.add');
+            Route::post('/edit',[ProductController::class, 'edit'])->name('admin.product.edit');
+            Route::get('/delete/{id}', [ProductController::class,'delete'])->name('admin.product.delete');
         });
     });
 ?>
