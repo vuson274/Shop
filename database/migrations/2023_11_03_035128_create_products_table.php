@@ -21,8 +21,8 @@ return new class extends Migration
             $table->double('price');
             $table->string('main_image');
             $table->string('second_image');
-            $table->bigInteger('variant_id');
-            $table->bigInteger('sold');
+            $table->bigInteger('variant_id')->nullable();
+            $table->bigInteger('sold')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

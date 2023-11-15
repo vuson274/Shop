@@ -26,7 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-      Schema::dropColumns('origin');
-      Schema::dropColumns('content');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('origin');
+            $table->dropColumn('content');
+        });
     }
 };
