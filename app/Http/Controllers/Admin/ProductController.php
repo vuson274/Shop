@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller implements ICRUD
 {
     //
     public function list()
     {
-        $list = Product::all();
+        // $list = Product::all();
+        $list = Product::find($id);
         $categories = Category::all();
         return view('be.product.list',compact('list', 'categories'));
     }
@@ -42,10 +44,43 @@ class ProductController extends Controller implements ICRUD
         return redirect(route('admin.product.list'))->with('success', "Thêm thành công");
 
     }
-
+    public function doEdit($id){
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('be.product.edit', compact('product', 'categories'));
+    }
     public function edit(Request $request)
     {
-        // TODO: Implement edit() method.
+        try {
+            $data = $request->all();
+            $product = Product::find($data['id']);
+            unset($data['_token']);
+            if (empty($data['mainImage'])){
+                $data['main_image'] = $product['main_image'];
+            } else{
+                Storage::disk('public')->delete($product['main_image']);
+                $mainImage = $data['mainImage'];
+                $mainImageName = time().'1'.$mainImage->getClientOriginalName();
+                $mainImage->storeAs('/products', $mainImageName, 'public');
+                $data['main_image'] = 'storage/products/' . $mainImageName;
+            }
+            if (empty($data['secondImage'])){
+                $data['second_image'] = $product['second_image'];
+            } else{
+                Storage::disk('public')->delete($product['second_image']);
+                $secondImage = $data['secondImage'];
+                $secondImageName = time().'2'.$secondImage->getClientOriginalName();
+                $secondImage->storeAs('/products', $secondImageName, 'public');
+                $data['second_image'] = 'storage/products/' . $secondImageName;
+            }
+            unset($data['insert']);
+            unset($data['mainImage']);
+            unset($data['secondImage']);
+            Product::where('id', $data['id'])->update($data);
+        }catch (\Exception $exception){
+            return redirect()->back()->with('error', 'Sửa thất bại');
+        }
+        return redirect(route('admin.product.list'))->with('success', 'Sửa thành công');
     }
 
     public function delete($id)

@@ -21,6 +21,7 @@
             Route::get('/',[ProductController::class, 'list'])->name('admin.product.list');
             Route::get('/add', [ProductController::class, 'doAdd'])->name('admin.product.doAdd');
             Route::post('/add',[ProductController::class,'add'])->name('admin.product.add');
+            Route::get('/edit/{id}',[ProductController::class,'doEdit'])->name('admin.product.doEdit');
             Route::post('/edit',[ProductController::class, 'edit'])->name('admin.product.edit');
             Route::get('/delete/{id}', [ProductController::class,'delete'])->name('admin.product.delete');
         });
