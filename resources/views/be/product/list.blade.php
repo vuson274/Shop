@@ -30,7 +30,7 @@
                         <td>{{$item->price}}</td>
                         <td>
                             <a class="btn btn-warning" href="{{route('admin.product.doEdit',['id'=>$item->id])}}">Sửa</a>
-                            <a class="btn btn-danger" href="{{route('admin.user.delete',['id'=>$item->id])}}" onclick="return confirm('Bạn có muốn xoá ?')">Xóa</a>
+                            <a class="btn btn-danger" href="{{route('admin.product.delete',['id'=>$item->id])}}" onclick="return confirm('Bạn có muốn xoá ?')">Xóa</a>
                         </td>
                     </tr>
                 @endforeach

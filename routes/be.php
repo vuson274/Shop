@@ -1,15 +1,17 @@
 <?php
-    use Illuminate\Support\Facades\Route;
-    use App\Http\Controllers\Admin\UserController;
-    use App\Http\Controllers\Admin\AdminController;
-    use App\Http\Controllers\Admin\CategoryController;
-    use App\Http\Controllers\Admin\ProductController;
-    Route::prefix('/admin')->group(function (){
+
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('/admin')->middleware('admin')->group(function (){
         Route::prefix('/user')->group(function (){
-            Route::get('/',[AdminController::class, 'list'])->name('admin.user.list');
-            Route::post('/add',[AdminController::class,'add'])->name('admin.user.add');
-            Route::post('/edit',[AdminController::class, 'edit'])->name('admin.user.edit');
-            Route::get('/delete/{id}', [AdminController::class,'delete'])->name('admin.user.delete');
+            Route::get('/',[UserController::class, 'list'])->name('admin.user.list');
+            Route::post('/add',[UserController::class,'add'])->name('admin.user.add');
+            Route::post('/edit',[UserController::class, 'edit'])->name('admin.user.edit');
+            Route::get('/delete/{id}', [UserController::class,'delete'])->name('admin.user.delete');
         });
         Route::prefix('/category')->group(function (){
             Route::get('/',[CategoryController::class, 'list'])->name('admin.category.list');
@@ -26,4 +28,7 @@
             Route::get('/delete/{id}', [ProductController::class,'delete'])->name('admin.product.delete');
         });
     });
+    Route::get('/admin',[LoginController::class,'viewLogin'])->name('login');
+    Route::post('/admin',[LoginController::class, 'Login'])->name('admin.login');
+    Route::get('/logout',[LoginController::class,'logout'])->name('admin.logout');
 ?>

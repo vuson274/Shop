@@ -13,8 +13,7 @@ class ProductController extends Controller implements ICRUD
     //
     public function list()
     {
-        // $list = Product::all();
-        $list = Product::find($id);
+        $list = Product::all();
         $categories = Category::all();
         return view('be.product.list',compact('list', 'categories'));
     }
@@ -85,6 +84,11 @@ class ProductController extends Controller implements ICRUD
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        try {
+            Product::where('id', $id)->delete();
+        }catch (\Exception $exception){
+            return redirect()->back()->with('error', 'Xóa thất bại');
+        }
+        return redirect()->back()->with('success', 'Xóa thành công');
     }
 }
