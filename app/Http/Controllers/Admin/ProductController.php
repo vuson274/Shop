@@ -25,6 +25,10 @@ class ProductController extends Controller implements ICRUD
 
     public function add(Request $request)
     {
+        $request->validate([
+                               'name'=>'required|min:6',
+                               'price'=>'required|numeric'
+                           ]);
         try {
             $data = $request->all();
             unset($data['_token']);
@@ -50,6 +54,7 @@ class ProductController extends Controller implements ICRUD
     }
     public function edit(Request $request)
     {
+
         try {
             $data = $request->all();
             $product = Product::find($data['id']);

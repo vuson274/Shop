@@ -54,93 +54,114 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Interface
-        </div>
-
-        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-               aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Components</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="cards.html">Cards</a>
-                </div>
-            </div>
+            <a class="nav-link" href="{{route('admin.user.list')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
+                </svg>
+                <span>Quản trị viên</span></a>
         </li>
-
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-               aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Utilities</span>
-            </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="utilities-color.html">Colors</a>
-                    <a class="collapse-item" href="utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
-                </div>
-            </div>
-        </li>
-
-        <!-- Divider -->
         <hr class="sidebar-divider">
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.category.list')}}">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Danh mục sản phẩm</span></a>
+        </li>
+        <hr class="sidebar-divider">
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.product.list')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+                    <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                </svg>
+                <span>Sản phẩm</span></a>
+        </li>
 
         <!-- Heading -->
-        <div class="sidebar-heading">
-            Addons
-        </div>
+{{--        <div class="sidebar-heading">--}}
+{{--            Interface--}}
+{{--        </div>--}}
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item active">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-               aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
-            </a>
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" href="login.html">Login</a>
-                    <a class="collapse-item" href="register.html">Register</a>
-                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item active" href="blank.html">Blank Page</a>
-                </div>
-            </div>
-        </li>
+{{--        <!-- Nav Item - Pages Collapse Menu -->--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"--}}
+{{--               aria-expanded="true" aria-controls="collapseTwo">--}}
+{{--                <i class="fas fa-fw fa-cog"></i>--}}
+{{--                <span>Components</span>--}}
+{{--            </a>--}}
+{{--            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">--}}
+{{--                <div class="bg-white py-2 collapse-inner rounded">--}}
+{{--                    <h6 class="collapse-header">Custom Components:</h6>--}}
+{{--                    <a class="collapse-item" href="buttons.html">Buttons</a>--}}
+{{--                    <a class="collapse-item" href="cards.html">Cards</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </li>--}}
 
-        <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
-        </li>
+{{--        <!-- Nav Item - Utilities Collapse Menu -->--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"--}}
+{{--               aria-expanded="true" aria-controls="collapseUtilities">--}}
+{{--                <i class="fas fa-fw fa-wrench"></i>--}}
+{{--                <span>Utilities</span>--}}
+{{--            </a>--}}
+{{--            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"--}}
+{{--                 data-parent="#accordionSidebar">--}}
+{{--                <div class="bg-white py-2 collapse-inner rounded">--}}
+{{--                    <h6 class="collapse-header">Custom Utilities:</h6>--}}
+{{--                    <a class="collapse-item" href="utilities-color.html">Colors</a>--}}
+{{--                    <a class="collapse-item" href="utilities-border.html">Borders</a>--}}
+{{--                    <a class="collapse-item" href="utilities-animation.html">Animations</a>--}}
+{{--                    <a class="collapse-item" href="utilities-other.html">Other</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </li>--}}
 
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
-        </li>
+{{--        <!-- Divider -->--}}
+{{--        <hr class="sidebar-divider">--}}
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+{{--        <!-- Heading -->--}}
+{{--        <div class="sidebar-heading">--}}
+{{--            Addons--}}
+{{--        </div>--}}
+
+{{--        <!-- Nav Item - Pages Collapse Menu -->--}}
+{{--        <li class="nav-item active">--}}
+{{--            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"--}}
+{{--               aria-controls="collapsePages">--}}
+{{--                <i class="fas fa-fw fa-folder"></i>--}}
+{{--                <span>Pages</span>--}}
+{{--            </a>--}}
+{{--            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"--}}
+{{--                 data-parent="#accordionSidebar">--}}
+{{--                <div class="bg-white py-2 collapse-inner rounded">--}}
+{{--                    <h6 class="collapse-header">Login Screens:</h6>--}}
+{{--                    <a class="collapse-item" href="login.html">Login</a>--}}
+{{--                    <a class="collapse-item" href="register.html">Register</a>--}}
+{{--                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>--}}
+{{--                    <div class="collapse-divider"></div>--}}
+{{--                    <h6 class="collapse-header">Other Pages:</h6>--}}
+{{--                    <a class="collapse-item" href="404.html">404 Page</a>--}}
+{{--                    <a class="collapse-item active" href="blank.html">Blank Page</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </li>--}}
+
+{{--        <!-- Nav Item - Charts -->--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link" href="charts.html">--}}
+{{--                <i class="fas fa-fw fa-chart-area"></i>--}}
+{{--                <span>Charts</span></a>--}}
+{{--        </li>--}}
+
+{{--        <!-- Nav Item - Tables -->--}}
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link" href="tables.html">--}}
+{{--                <i class="fas fa-fw fa-table"></i>--}}
+{{--                <span>Tables</span></a>--}}
+{{--        </li>--}}
+
+{{--        <!-- Divider -->--}}
+{{--        <hr class="sidebar-divider d-none d-md-block">--}}
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -328,9 +349,9 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
                             <img class="img-profile rounded-circle"
-                                 src="img/undraw_profile.svg">
+                                 src="{{asset('/system/undraw_profile.svg')}}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

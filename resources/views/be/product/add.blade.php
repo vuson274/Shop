@@ -5,7 +5,7 @@
     <form action="{{route('admin.product.add')}}"  method="post"   role="form" enctype="multipart/form-data">
         @csrf
             <div class="form-group">
-                <label for="">Tên</label> <span id="errorname"></span>
+                <label for="">Tên</label> <span id="errorname" class="text-danger">@error('name'){{$message}}@enderror</span>
                 <input type="text" class="form-control"  id="name" name="name"   value="{{old('name')}}" onblur="checkname()"; Required />
             </div>
             <div class="form-group">
@@ -31,8 +31,8 @@
             </div>
 
             <div class="form-group">
-                <label for="">Giá</label> <span id="errorprice"></span>
-                <input type="number" class="form-control" id="price" name="price"  value="{{old('price')}}" onblur="checkPrice();" Required>
+                <label for="">Giá</label> <span id="errorprice" class="text-danger">@error('price'){{$message}}@enderror</span>
+                <input type="text" class="form-control" id="price" name="price"  value="{{old('price')}}" onblur="checkPrice();" Required>
             </div>
 
             <div class="form-group">
