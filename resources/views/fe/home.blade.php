@@ -29,14 +29,14 @@
                         <ul class="filter__controls">
                             <li class="active" data-filter="*">All</li>
                             @foreach($categories as $category)
-                            <li  data-filter="'.'+ 'pro'+{{$category->id}}+'cat'" >{{$category->name}}</li>
+                            <li  data-filter=".pro{{$category->id}}cat" >{{$category->name}}</li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="row property__gallery" id="page">
                     @foreach($products as $product)
-                    <div  id="product"    class="'col-lg-3 col-md-4 col-sm-6 mix '+ 'pro'+{{$product->category->name}}+'cat'">
+                    <div  id="product"    class="'col-lg-3 col-md-4 col-sm-6 mix pro{{$product->category->id}}cat">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-id="{{$product->id}}" data-setbg="{{asset($product->main_image)}}">
                                 <ul class="product__hover">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6>
-                                    <a href="@{/product/{id}(id = ${product.id})}">{{$product->name}}</a>
+                                    <a href="{{route('product',['id'=>$product->id])}}">{{$product->name}}</a>
                                 </h6>
 {{--                                <div class="product__price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + đ"></div>--}}
                                 <div class="product__price">{{number_format($product->price, 0) }} đ</div>
@@ -76,7 +76,7 @@
                                 <div class="banner__text">
                                     <span>The Moon Light Collection</span>
                                     <h1>The Project Telescope</h1>
-                                    <a th:href="@{/shop}">Shop now</a>
+                                    <a href="{{route('shop')}}">Shop now</a>
                                 </div>
                             </div>
                             <div class="banner__item">
@@ -109,17 +109,19 @@
                             <div class="section-title">
                                 <h4>Mới</h4>
                             </div>
-                            <div class="trend__item" th:each="productNew : ${listProductsNew}">
+                            @foreach($listNewProduct as $newProduct)
+                            <div class="trend__item" >
                                 <div class="trend__item__pic">
-                                    <img width="90" height="90" th:src="@{'/getimage/'+ ${productNew.mainImage}}" alt="">
+                                    <img width="90" height="90" src="{{asset($newProduct->main_image)}}" alt="">
                                 </div>
                                 <div class="trend__item__text">
                                     <h6>
-                                        <a th:href="@{/product/{id}(id = ${productNew.id})}" th:text="${productNew.name}"></a>
+                                        <a href="{{route('product',['id'=>$newProduct->id])}}">{{$newProduct->name}}</a>
                                     </h6>
-                                    <div class="product__price" th:text="${#numbers.formatDecimal(productNew.price, 0, 'COMMA', 0, 'POINT')} + đ"></div>
+                                    <div class="product__price">{{number_format($newProduct->price, 0) }} đ</div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- HOT -->
@@ -128,36 +130,40 @@
                             <div class="section-title">
                                 <h4>Hot</h4>
                             </div>
-                            <div class="trend__item" th:each="productHot : ${listProductsHot}">
+                            @foreach($listHotProduct as $hotProduct)
+                            <div class="trend__item">
                                 <div class="trend__item__pic">
-                                    <img width="90" height="90" th:src="@{'/getimage/'+ ${productHot.mainImage}}" alt="">
+                                    <img width="90" height="90" src="{{asset($hotProduct->main_image)}}" alt="">
                                 </div>
                                 <div class="trend__item__text">
                                     <h6>
-                                        <a th:href="@{/product/{id}(id = ${productHot.id})}" th:text="${productHot.name}"></a>
+                                        <a href="{{route('product',['id'=>$hotProduct->id])}}">{{$hotProduct->name}}</a>
                                     </h6>
-                                    <div class="product__price" th:text="${#numbers.formatDecimal(productHot.price, 0, 'COMMA', 0, 'POINT')} + đ"></div>
+                                    <div class="product__price">{{number_format($hotProduct->price, 0) }} đ</div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- HIGHT CLASS -->
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="trend__content">
                             <div class="section-title">
-                                <h4>Cao cấp</h4>
+                                <h4>Xem nhiều nhất</h4>
                             </div>
-                            <div class="trend__item" th:each="productHightClass: ${listProductsHightclass}">
+                            @foreach($listViewProduct as $viewProduct)
+                            <div class="trend__item">
                                 <div class="trend__item__pic">
-                                    <img width="90" height="90" th:src="@{'/getimage/'+ ${productHightClass.mainImage}}" alt="">
+                                    <img width="90" height="90" src="{{asset($viewProduct->main_image)}}" alt="">
                                 </div>
                                 <div class="trend__item__text">
                                     <h6>
-                                        <a th:href="@{/product/{id}(id = ${productHightClass.id})}" th:text="${productHightClass.name}"></a>
+                                        <a href="{{route('product',['id'=>$viewProduct->id])}}" >{{$viewProduct->name}}</a>
                                     </h6>
-                                    <div class="product__price" th:text="${#numbers.formatDecimal(productHightClass.price, 0, 'COMMA', 0, 'POINT')} + đ"></div>
+                                    <div class="product__price" >{{number_format($viewProduct->price, 0) }} đ</div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
 

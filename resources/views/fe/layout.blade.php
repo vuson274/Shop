@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Moon Light</title>
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
@@ -65,11 +66,11 @@
             <div class="col-xl-6 col-lg-7" style="padding: 0; margin: 0">
                 <nav class="header__menu">
                     <ul>
-                        <li><a th:href="@{/home}">Trang chủ</a></li>
-                        <li><a th:href="@{/shop}">Cửa hàng</a></li>
-                        <li><a th:href="@{/blog}">Bài viết</a></li>
-                        <li><a th:href="@{/contact}">Liên hệ</a></li>
-                        <li><a th:href="@{/warranty}">Bảo hành</a></li>
+                        <li><a href="{{route('home')}}">Trang chủ</a></li>
+                        <li><a href={{route('shop')}}>Cửa hàng</a></li>
+                        <li><a href="@{/blog}">Bài viết</a></li>
+                        <li><a href={{route('contact')}}>Liên hệ</a></li>
+                        <li><a href="@{/warranty}">Bảo hành</a></li>
                     </ul>
                 </nav>
             </div>
@@ -77,7 +78,7 @@
 
                 <div class="header__right">
                     <div class="header__right__auth" th:if="${session.member == null}">
-                        <a th:href="@{/login}">Đăng nhập</a>
+                        <a href="{{route('singin')}}">Đăng nhập</a>
                     </div>
                     <ul class="header__right__widget">
                         <li  th:if="${session.member}">
@@ -205,12 +206,13 @@
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
-            <form class="search-model-form" id="form_search" method="post">
+            <form class="search-model-form" id="form_search" action="product-deatails.php" method="get">
                 <input type="text" name="name" id="search_input" placeholder="Tìm kiếm sản phẩm .....">
             </form>
         </div>
         <div id="show_search" style="">
             <div class="list-group" id="show-list" style="overflow: auto;height: 500px;">
+                <!-- Here autocomplete list will be display -->
             </div>
         </div>
     </div>
@@ -240,6 +242,36 @@
             road.style.top = value * 0.2 + 'px';
             text.style.top = value * 1 + 'px';
         })
+    </script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script>
+        $(document).on('keyup','#search_input',function(e){
+            let searchText = $(this).val();
+            if (searchText != " "){
+                $.ajax({
+                    url: "{{ route('search') }}",
+                    method: "get",
+                    data: {
+                        name: searchText,
+                    },
+                    success: function (response) {
+                        let result =  response.map(value =>{
+                            return  '<a href="/product/'+value.id+'" class="list-group-item list-group-item-action border-1"><img style="width: 10%;" src="http://127.0.0.1:8000/'+value.main_image+'" alt=""> &ensp;' +value.name+'</a>'
+                        })
+                        $("#show-list").html(result);
+                    },
+                });
+            }else {
+                $("#show-list").html("");
+            }
+        });
+
     </script>
 </body>
 </html>
