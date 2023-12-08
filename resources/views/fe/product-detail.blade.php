@@ -66,7 +66,7 @@
                             </div>
                             <div class="product__details__price">{{number_format($product->price, 0) }} đ</div>
                             <div class="product__details__button">
-                                <a href="#order" class="cart-btn" th:id="${productDetail.get().id}"><span class="icon_bag_alt"></span> Thêm giỏ hàng</a>
+                                <a href="#order" class="cart-btn" id="{{$product->id}}"><span class="icon_bag_alt"></span> Thêm giỏ hàng</a>
                             </div>
                         </div>
                     </div>

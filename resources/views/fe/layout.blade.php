@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"
+    <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -32,10 +32,16 @@
     <ul class="offcanvas__widget">
         <li><span class="icon_search search-switch"></span></li>
         <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip" if="${session.myLikeItems}" th:text="${session.myLikeNum}"></div>
+                <div class="tip" if="${session.myLikeItems}" text="${session.myLikeNum}"></div>
             </a></li>
         <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip" if="${session.myCartItems}" th:text="${session.myCartNum}"></div>
+                <div class="tip">
+                    @if(session('CART'))
+                        {{count(session('CART'))}}
+                    @else
+                        0
+                    @endif
+                </div>
             </a></li>
     </ul>
     <div class="offcanvas__logo">
@@ -78,7 +84,7 @@
 
                 <div class="header__right">
                     <div class="header__right__auth" th:if="${session.member == null}">
-                        <a href="{{route('singin')}}">Đăng nhập</a>
+                        <a href="{{route('signin')}}">Đăng nhập</a>
                     </div>
                     <ul class="header__right__widget">
                         <li  th:if="${session.member}">
@@ -101,7 +107,13 @@
                             <a th:href="@{/shopCart}">
                                 <span class="icon_bag_alt" style="color: #fff"></span>
                                 <div id="carts">
-                                    <div class="tip" id="bag-carts" th:if="${session.myCartItems}" th:text="${session.myCartNum}"></div>
+                                    <div class="tip" id="bag-carts">
+                                        @if(session('CART'))
+                                            {{count(session('CART'))}}
+                                        @else
+                                            0
+                                        @endif
+                                    </div>
                                 </div>
                             </a>
                         </li>
@@ -206,7 +218,7 @@
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
-            <form class="search-model-form" id="form_search" action="product-deatails.php" method="get">
+            <form class="search-model-form" id="form_search" action="" method="get">
                 <input type="text" name="name" id="search_input" placeholder="Tìm kiếm sản phẩm .....">
             </form>
         </div>
@@ -262,7 +274,7 @@
                     },
                     success: function (response) {
                         let result =  response.map(value =>{
-                            return  '<a href="/product/'+value.id+'" class="list-group-item list-group-item-action border-1"><img style="width: 10%;" src="http://127.0.0.1:8000/'+value.main_image+'" alt=""> &ensp;' +value.name+'</a>'
+                            return  '<a href="/product/'+value.id+'" class="list-group-item list-group-item-action border-1">&ensp;' +value.name+'</a>'
                         })
                         $("#show-list").html(result);
                     },
@@ -271,7 +283,23 @@
                 $("#show-list").html("");
             }
         });
-
+    </script>
+    <script>
+        $(document).on('click','.cart-btn', function (e){
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('api.cart.add') }}",
+                method: "post",
+                data: {
+                    id: id,
+                },
+                success: function (response) {
+                    $("#carts").load(' #bag-carts');
+                    $('.notiProduct').slideDown('fast');
+                    $('.notiProduct').delay(2000).slideUp('fast');
+                },
+            });
+        });
     </script>
 </body>
 </html>
