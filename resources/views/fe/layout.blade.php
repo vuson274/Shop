@@ -104,7 +104,7 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/shopCart}">
+                            <a href="{{route('shop-cart')}}">
                                 <span class="icon_bag_alt" style="color: #fff"></span>
                                 <div id="carts">
                                     <div class="tip" id="bag-carts">
@@ -127,12 +127,12 @@
     </div>
     </div>
 </header>
-<section class="favorite_list">
-    <div class="notiProduct-item addCart-alert-animate">
-        <p>Đã thêm vào danh sách yêu thích </p>
-        <a th:href="@{/favoriteList}" class="btn-hover-dark">Xem danh sách</a>
-    </div>
-</section>
+{{--<section class="favorite_list">--}}
+{{--    <div class="notiProduct-item addCart-alert-animate">--}}
+{{--        <p>Đã thêm vào danh sách yêu thích </p>--}}
+{{--        <a th:href="@{/favoriteList}" class="btn-hover-dark">Xem danh sách</a>--}}
+{{--    </div>--}}
+{{--</section>--}}
 <section class="notiProduct">
     <div class="notiProduct-item addCart-alert-animate">
         <p>Đã thêm vào giỏ hàng!</p>
@@ -297,6 +297,26 @@
                     $("#carts").load(' #bag-carts');
                     $('.notiProduct').slideDown('fast');
                     $('.notiProduct').delay(2000).slideUp('fast');
+                },
+            });
+        });
+    </script>
+    <script>
+        $(document).on('click','.del-cart', function (){
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('api.cart.delete') }}",
+                method: "get",
+                data: {
+                    id: id,
+                },
+                success: function (response) {
+                    $("#carts").load(' #bag-carts');
+                    $("#cart").load(' #data-cart');
+                    $("#carts").load(' #bag-carts');
+                    $("#total-price").load(' .total-price');
+
+                    {{--$('body').load('{{route('cart')}}');--}}
                 },
             });
         });

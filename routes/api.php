@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/search',[HomeController::class,'search'])->name('search');
 Route::post('/add-cart',[CartController::class,'addItemToCart'])->name('api.cart.add');
+Route::get('/shop-cart',[CartController::class,'shopCart'])->name('shop-cart');
+Route::get('/delete',[CartController::class,'delete'])->name('api.cart.delete');
