@@ -75,7 +75,7 @@
                         <div class="cart__total__procced total-price">
                             <h6>Giá trị đơn hàng</h6>
                             <span  class="totalPrice">{{number_format($total)}} đ</span>
-                            <a th:href="@{/checkout}" class="primary-btn">Thanh toán</a>
+                            <a href="{{route('check-out')}}" class="primary-btn">Thanh toán</a>
                         </div>
                     </div>
                 </div>

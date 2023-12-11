@@ -22,39 +22,42 @@
 </head>
 <body>
 <section>
-    <img src="{{asset('/web/images/img,jpg')}}" class="bg" alt="">
-    <div class="toast show" th:if="${noti}" >
-        <div class="toast-header">
-            <strong class="me-auto" th:text="${noti}"></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    <img src="{{asset('/web/images/img.jpg')}}" class="bg" alt="">
+{{--    <div class="toast show" th:if="${noti}" >--}}
+{{--        <div class="toast-header">--}}
+{{--            <strong class="me-auto" th:text="${noti}"></strong>--}}
+{{--            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>--}}
+{{--        </div>--}}
+{{--        <div class="toast-body">--}}
+{{--            <a th:href="@{/home}">Trở về trang chủ</a>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+    @if(\Illuminate\Support\Facades\Session::has('error'))
+        <div class="toast show" >
+            <div class="toast-header">
+                <strong class="me-auto">{{\Illuminate\Support\Facades\Session::get('error')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                <a th:href="@{/home}">Trở về trang chủ</a>
+            </div>
         </div>
-        <div class="toast-body">
-            <a th:href="@{/home}">Trở về trang chủ</a>
-        </div>
-    </div>
+    @endif
     <div class="login">
         <h2>Sign Up</h2>
-        <form th:action="@{/createMember}" method="post" th:object="${user}">
+        <form action="{{route('register')}}" method="post">
+            @csrf
             <div class="inputBox">
-                <input type="text" id="userName" placeholder="userName" th:field="*{userName}" name="userName" required>
+                <input type="text" id="name" placeholder="name"  name="name" required>
             </div>
             <div class="inputBox">
-                <input type="text" id="name" placeholder="fullName"  th:field="*{name}" name="name" required>
+                <input type="email" id="email" placeholder="Email"   name="email" required>
             </div>
             <div class="inputBox">
-                <input type="email" id="email" placeholder="Email"  th:field="*{email}" name="email" required>
+                <input type="password" id="password"   name="password" placeholder="Password" required>
             </div>
             <div class="inputBox">
-                <input type="password" id="password"  th:field="*{password}" name="password" placeholder="Password" required>
-            </div>
-            <div class="inputBox">
-                <input type="tel" id="phone"  th:field="*{phone}" name="phone" placeholder="Phone" required>
-            </div>
-            <div class="inputBox">
-                <input type="text" id="address"  th:field="*{address}" name="address" placeholder="Address" required>
-            </div>
-            <div class="inputBox">
-                <input type="date" id="dateOfBirth"  th:field="*{dateOfBirth}" name="dateOfBirth" placeholder="birthDay" required>
+                <input type="tel" id="phone"  name="phone" placeholder="Phone" required>
             </div>
             <div class="inputBox">
                 <input type="submit"  value="Sign Up" id="btn">
@@ -62,6 +65,6 @@
         </form>
     </div>
 </section>
-<script src="@{../cms/js/myjs.js}"></script>
+{{--<script src="@{../cms/js/myjs.js}"></script>--}}
 </body>
 </html>

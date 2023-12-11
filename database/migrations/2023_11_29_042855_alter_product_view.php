@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products',function (Blueprint $table){
-            $table->bigInteger('view');
+            $table->bigInteger('view')->default(0);
         });
     }
 

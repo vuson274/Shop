@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
     const CART_KEY = 'CART';
-    public function addItemToCart(Request $request)
-    {
+    public function addToCard(Request $request){
         if($request->session()->exists(self::CART_KEY)){
             $cart = $request->session()->get(self::CART_KEY);
             $found = false;
@@ -39,22 +38,20 @@ class CartController extends Controller
             $request->session()->put(self::CART_KEY, $cart);
         }
         return response()->json(['msg' => 'Add item success', 'cart' => $cart],200);
-
     }
 
-    public function shopCart(Request $request){
+    public function cart(Request $request){
         $total = 0;
         if ($request->session()->exists(self::CART_KEY)){
             $carts = $request->session()->get(self::CART_KEY);
             foreach ($carts as $cart){
-                $total+= $cart['product']['price']* $cart['quantity'];
+                $total += $cart['product']['price']* $cart['quantity'];
             }
         }
         return view('fe.shop-cart', compact('total'));
     }
 
-    public function delete(Request $request)
-    {
+    public function deleteItemCart(Request $request){
         $id = $request->id;
         $cart = $request->session()->get(self::CART_KEY);
         $cartClc = collect($cart);
@@ -64,5 +61,22 @@ class CartController extends Controller
         $cart = collect($cart->values());//đánh lại chỉ số
         $request->session()->put(self::CART_KEY, $cart->toArray());
         return response()->json(['msg' => 'Delete item success', 'cart' => $cart], 200);
+
+    }
+
+    public function update(Request $request){
+        $id = $request->id;
+        $quanttity =  $request->qty > 0 ? $request->qty : 1 ;
+        $cart = $request->session()->get(self::CART_KEY);
+        $cartClc = collect($cart);
+        $cart = $cartClc->map(function ($item) use ($id, $quanttity){
+            if ($item['product']->id == $id){
+                $item['quantity'] = $quanttity;
+                return $item;
+            }
+            return $item;
+        });
+        $request->session()->put(self::CART_KEY, $cart->toArray());
+        return response()->json(['msg' => 'Update item success', 'cart' => $cart], 200);
     }
 }

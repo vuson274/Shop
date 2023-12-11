@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/search',[HomeController::class,'search'])->name('search');
-Route::post('/add-cart',[CartController::class,'addItemToCart'])->name('api.cart.add');
-Route::get('/shop-cart',[CartController::class,'shopCart'])->name('shop-cart');
-Route::get('/delete',[CartController::class,'delete'])->name('api.cart.delete');
+Route::post('/add-cart',[CartController::class,'addToCard'])->name('api.cart.add');
+Route::get('/shop-cart',[CartController::class,'cart'])->name('shop-cart');
+Route::get('/delete',[CartController::class,'deleteItemCart'])->name('api.cart.delete');
+Route::get('/update',[CartController::class,'update'])->name('api.cart.update');

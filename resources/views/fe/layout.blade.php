@@ -83,16 +83,19 @@
             <div class="col-lg-3" style="padding: 0; margin: 0">
 
                 <div class="header__right">
-                    <div class="header__right__auth" th:if="${session.member == null}">
+                    @if(empty(\Illuminate\Support\Facades\Auth::user()))
+                    <div class="header__right__auth">
                         <a href="{{route('signin')}}">Đăng nhập</a>
                     </div>
+                    @else
                     <ul class="header__right__widget">
-                        <li  th:if="${session.member}">
-                            <a href="#" th:text="${session.member.userName}" style="color: #fff;"></a>
+                        <li>
+                            <a href="#" style="color: #fff;">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
                             <ul>
                                 <li><a th:href="@{/logoutMember}" onclick ="return confirm ('bạn có thật sự muốn đăng xuất?');">Đăng xuất</a></li>
                             </ul>
                         </li>
+                    @endif
                         <li>
                             <span class="icon_search search-switch"></span>
                         </li>
@@ -136,7 +139,7 @@
 <section class="notiProduct">
     <div class="notiProduct-item addCart-alert-animate">
         <p>Đã thêm vào giỏ hàng!</p>
-        <a th:href="@{/shopCart}" class="btn-hover-dark">Vào giỏ hàng</a>
+        <a href="{{route('shop-cart')}}" class="btn-hover-dark">Vào giỏ hàng</a>
     </div>
 </section>
 <section class="bg1">
@@ -274,7 +277,7 @@
                     },
                     success: function (response) {
                         let result =  response.map(value =>{
-                            return  '<a href="/product/'+value.id+'" class="list-group-item list-group-item-action border-1">&ensp;' +value.name+'</a>'
+                            return  '<a href="/product/'+value.id+'" class="list-group-item list-group-item-action border-1"><img style="width: 10%;" src="http://127.0.0.1:8000/'+value.main_image+'" alt=""> &ensp;' +value.name+'</a>'
                         })
                         $("#show-list").html(result);
                     },
@@ -302,6 +305,23 @@
         });
     </script>
     <script>
+    $(document).on('click','.order', function (e){
+        var id = $(this).attr('id');
+        $.ajax({
+            url: "{{ route('api.cart.add') }}",
+            method: "post",
+            data: {
+                id: id,
+            },
+            success: function (response) {
+                $("#carts").load(' #bag-carts');
+                $('.notiProduct').slideDown('fast');
+                $('.notiProduct').delay(2000).slideUp('fast');
+            },
+        });
+    });
+    </script>
+    <script>
         $(document).on('click','.del-cart', function (){
             var id = $(this).attr('id');
             $.ajax({
@@ -318,6 +338,26 @@
 
                     {{--$('body').load('{{route('cart')}}');--}}
                 },
+            });
+        });
+    </script>
+    <script>
+        $(document).on('click','.inc', function (){
+            let qty  = new Number($(this).attr('name'));
+            qty += 1;
+            let id = $(this).attr('id');
+            $.get("{{ route('api.cart.update') }}",{id: id, qty : qty },function(data){
+                $("#cart").load(' #data-cart');
+                $("#total-price").load(' .total-price');
+            });
+        });
+        $(document).on('click','.dec', function (){
+            let qty  = new Number($(this).attr('name'));
+            qty -= 1;
+            let id = $(this).attr('id');
+            $.get("{{ route('api.cart.update') }}",{id: id, qty : qty },function(data){
+                $("#cart").load(' #data-cart');
+                $("#total-price").load(' .total-price');
             });
         });
     </script>
