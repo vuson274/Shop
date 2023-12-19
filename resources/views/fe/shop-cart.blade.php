@@ -75,7 +75,8 @@
                         <div class="cart__total__procced total-price">
                             <h6>Giá trị đơn hàng</h6>
                             <span  class="totalPrice">{{number_format($total)}} đ</span>
-                            <a href="{{route('check-out')}}" class="primary-btn">Thanh toán</a>
+                            <a href="{{route('check-out')}}" class="primary-btn" style="margin-bottom:20px">COD</a>
+                            <a href="{{route('check-out')}}" class="primary-btn">VNPAY</a>
                         </div>
                     </div>
                 </div>

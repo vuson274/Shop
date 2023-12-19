@@ -12,5 +12,6 @@
     Route::post('/signup',[AuthController::class,'register'])->name('register');
     Route::get('/check-out',[OrderController::class,'ckeckOut'])->name('check-out');
     Route::post('/login',[AuthController::class,'loginUser'])->name('login-user');
+    Route::get('/logout',[AuthController::class,'logoutUser'])->name('logout-user');
     Route::middleware('user')->post('/order',[OrderController::class,'makeOrder'])->name('order');
 ?>

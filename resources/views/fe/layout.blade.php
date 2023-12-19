@@ -81,21 +81,21 @@
                 </nav>
             </div>
             <div class="col-lg-3" style="padding: 0; margin: 0">
-
                 <div class="header__right">
-                    @if(empty(\Illuminate\Support\Facades\Auth::user()))
-                    <div class="header__right__auth">
-                        <a href="{{route('signin')}}">Đăng nhập</a>
-                    </div>
-                    @else
-                    <ul class="header__right__widget">
-                        <li>
-                            <a href="#" style="color: #fff;">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
-                            <ul>
-                                <li><a th:href="@{/logoutMember}" onclick ="return confirm ('bạn có thật sự muốn đăng xuất?');">Đăng xuất</a></li>
-                            </ul>
-                        </li>
+                    @if(!\Illuminate\Support\Facades\Auth::check())
+                        <div class="header__right__auth">
+                            <a href="{{route('signin')}}">Đăng nhập</a>
+                        </div>
                     @endif
+                    <ul class="header__right__widget">
+                        @if(\Illuminate\Support\Facades\Auth::check())
+                            <li  if="${session.member}">
+                                <a href="#" style="color: #fff;">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+                                <ul>
+                                    <li><a href="{{route('logout-user')}}" onclick ="return confirm ('bạn có thật sự muốn đăng xuất?');">Đăng xuất</a></li>
+                                </ul>
+                            </li>
+                        @endif
                         <li>
                             <span class="icon_search search-switch"></span>
                         </li>
@@ -116,6 +116,7 @@
                                         @else
                                             0
                                         @endif
+
                                     </div>
                                 </div>
                             </a>

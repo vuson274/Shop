@@ -12,7 +12,6 @@ class AuthController extends Controller
     public function register(Request $request){
         try {
             $data = $request->all();
-            unset($data['_token']);
             if (User::where('email', $data['email'])->first()) {
                 return redirect()->back()->with('error','Email đã tồn tại trong hệ thống');
             }
@@ -30,5 +29,10 @@ class AuthController extends Controller
                 return redirect()->route('home');
             }
             return back();
+    }
+
+    public function logoutUser(){
+        Auth::logout();
+        return redirect()->route('home');
     }
 }
