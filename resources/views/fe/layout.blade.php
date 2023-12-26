@@ -76,7 +76,7 @@
                         <li><a href={{route('shop')}}>Cửa hàng</a></li>
                         <li><a href="@{/blog}">Bài viết</a></li>
                         <li><a href={{route('contact')}}>Liên hệ</a></li>
-                        <li><a href="@{/warranty}">Bảo hành</a></li>
+                        <li><a href="{{route('warranty')}}">Bảo hành</a></li>
                     </ul>
                 </nav>
             </div>
@@ -84,14 +84,17 @@
                 <div class="header__right">
                     @if(!\Illuminate\Support\Facades\Auth::check())
                         <div class="header__right__auth">
-                            <a href="{{route('signin')}}">Đăng nhập</a>
+                            <a href="{{route('signin')}}"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
+                                </svg></a>
                         </div>
                     @endif
                     <ul class="header__right__widget">
                         @if(\Illuminate\Support\Facades\Auth::check())
-                            <li  if="${session.member}">
+                            <li>
                                 <a href="#" style="color: #fff;">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
                                 <ul>
+                                    <li><a href="{{route('edit-profile')}}">Hồ sơ</a></li>
                                     <li><a href="{{route('logout-user')}}" onclick ="return confirm ('bạn có thật sự muốn đăng xuất?');">Đăng xuất</a></li>
                                 </ul>
                             </li>
@@ -102,7 +105,7 @@
                         <li>
                             <a th:href="@{/favoriteList}"><span class="icon_heart_alt" style="color: #fff"></span>
                                 <div id="heart">
-                                    <div class="tip" id="like"  th:if="${session.myLikeItems}" th:text="${session.myLikeNum}"></div>
+                                    <div class="tip" id="like"  if="${session.myLikeItems}" text="${session.myLikeNum}"></div>
                                 </div>
                             </a>
                         </li>

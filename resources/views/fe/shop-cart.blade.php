@@ -76,18 +76,18 @@
                             <h6>Giá trị đơn hàng</h6>
                             <span  class="totalPrice">{{number_format($total)}} đ</span>
                             <a href="{{route('check-out')}}" class="primary-btn" style="margin-bottom:20px">COD</a>
-                            <a href="{{route('check-out')}}" class="primary-btn">VNPAY</a>
+                            <a href="{{route('checkout-vnpay')}}" class="primary-btn">VNPAY</a>
                         </div>
                     </div>
                 </div>
             </div>
             @else
-            <div class="container" th:if="${session.myCartItems == null}">
+            <div class="container" if="${session.myCartItems == null}">
                 <div class="col-md-6 offset-md-3">
                     <div class="noti_listProduct">
                         <h4>Giỏ hàng trống</h4>
                         <div class="link">
-                            <a th:href="@{/home}">Về Trang Chủ</a>
+                            <a href="@{/home}">Về Trang Chủ</a>
                         </div>
                     </div>
                 </div>
