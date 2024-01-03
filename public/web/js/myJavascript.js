@@ -55,63 +55,63 @@
 
 
 //yêu thích sản phẩm
-$(document).on('click','.heart',function(e){
-    var id= $(this).attr('id');
-    $.ajax({
-        url         : '/likeProduct',
-        type        : 'get',
-        dataType    : 'json',
-        data        : { id : id },
-        success : function(data){
-            $("#heart").load(' #like');
-            $('.favorite_list').slideDown('fast');
-            $('.favorite_list').delay(2000).slideUp('fast');
-        },
-        error : function(data){
-        }
-    });
-});
+// $(document).on('click','.heart',function(e){
+//     var id= $(this).attr('id');
+//     $.ajax({
+//         url         : '/likeProduct',
+//         type        : 'get',
+//         dataType    : 'json',
+//         data        : { id : id },
+//         success : function(data){
+//             $("#heart").load(' #like');
+//             $('.favorite_list').slideDown('fast');
+//             $('.favorite_list').delay(2000).slideUp('fast');
+//         },
+//         error : function(data){
+//         }
+//     });
+// });
 
 //xóa sản phẩm yêu thích
-$(document).on('click','.delete',function(e){
-    var id= $(this).attr('id');
-    $.ajax({
-        url         : '/delLikeProduct',
-        type        : 'get',
-        dataType    : 'json',
-        data        : { id : id },
-        success : function(data){
-            $("#heart").load(' #like');
-            $('body').load('/favoriteList')
-        },
-        error : function(data){
-        }
-    });
-});
+// $(document).on('click','.delete',function(e){
+//     var id= $(this).attr('id');
+//     $.ajax({
+//         url         : '/delLikeProduct',
+//         type        : 'get',
+//         dataType    : 'json',
+//         data        : { id : id },
+//         success : function(data){
+//             $("#heart").load(' #like');
+//             $('body').load('/favoriteList')
+//         },
+//         error : function(data){
+//         }
+//     });
+// });
 
 
 
 //chi tiết sản phẩm
-$(document).on('click','.detail',function(e){
-    var id = $(this).attr('id');
-    // var action = 'detail';
-    $.ajax({
-        url         : '/productDetail',
-        type        : 'get',
-        dataType    : 'json',
-        data        : { id : id },
-        success : function(data){
-            var name= data.name;
-            $('#imgDetail').html('<img src="/getimage/'+data.mainImage+'">');
-            $('.modal-body .proDes').html(data.description);
-            $('.modal-body h3').html(name);
-            $('.modal-body h4').html(Number(data.price).toLocaleString('en')+"đ");
-            $('.modal-body a').attr('id',data.id);
-        },
-        error : function(data){
-        }
-    });
-});
+// $(document).on('click','.detail',function(e){
+//     var id = $(this).attr('id');
+//     // var action = 'detail';
+//     $.ajax({
+//         url         : '/productDetail',
+//         type        : 'get',
+//         dataType    : 'json',
+//         data        : { id : id },
+//         success : function(data){
+//             var name= data.name;
+//             $('#imgDetail').html('<img src="/getimage/'+data.mainImage+'">');
+//             $('.modal-body .proDes').html(data.description);
+//             $('.modal-body h3').html(name);
+//             $('.modal-body h4').html(Number(data.price).toLocaleString('en')+"đ");
+//             $('.modal-body a').attr('id',data.id);
+//         },
+//         error : function(data){
+//         }
+//     });
+// });
 
 // $(document).on('keyup','#search_input',function(e){
 //     $("#form_search").css({'position':'absolute','top':'120px'});

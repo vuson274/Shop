@@ -17,7 +17,7 @@ class UserAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()){
+        if (Auth::check() && Auth::user()->level == 2){
             return $next($request);
         }
         return back()->with('error','Vui lòng đăng nhập trước khi đặt hàng');

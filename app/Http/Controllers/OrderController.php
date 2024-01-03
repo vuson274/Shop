@@ -46,6 +46,7 @@ class OrderController extends Controller
                 }
             }
             $data = $request->all();
+            $orderCode = time().$total.Auth::user()->id;
             $order = Order::create([
                'user_id'=>Auth::user()->id,
                'total_price' => $total,
@@ -55,6 +56,7 @@ class OrderController extends Controller
                'address'=>$data['address'],
                'method'=>1,
                'status'=>1,
+               'order_code'=>$orderCode,
            ]);
             foreach ($carts as $cart){
                 OrderDetail::create([
@@ -83,9 +85,9 @@ class OrderController extends Controller
             }
             $mail = $data['email'];
             $name = $data['name'];
-            Mail::send('fe.email', compact('name','mail','carts','total'), function ($email) use ($mail, $name, $carts, $total){
+            Mail::send('fe.email', compact('name','mail','carts','total','orderCode'), function ($email) use ($mail, $name, $carts, $total,$orderCode){
                 $email->subject('Thông báo đơn hàng');
-                $email->to($mail,$name,$carts,$total);
+                $email->to($mail,$name,$carts,$total,$orderCode);
             });
             $request->session()->pull(self::CART_KEY);
             DB::commit();
@@ -223,6 +225,7 @@ class OrderController extends Controller
                         $total += $cart['product']['price']* $cart['quantity'];
                     }
                 }
+                $orderCode = $dataVnpay['vnp_TxnRef'];
                 $order = Order::create([
                                            'user_id'=> Auth::user()->id,
                                            'total_price' => $total,
@@ -232,6 +235,7 @@ class OrderController extends Controller
                                            'address'=>$data[2],
                                            'method'=>2,
                                            'status'=>1,
+                                           'order_code'=>$orderCode,
                                        ]);
                 foreach ($carts as $cart) {
                     OrderDetail::create([
@@ -258,9 +262,9 @@ class OrderController extends Controller
                     Product::where('id', $cart['product']['id'])->update($dataPro);
                     $name = $data[1];
                     $mail = $data[4];
-                    Mail::send('fe.email',compact('name','mail','carts','total'),function ($email) use ($total, $name,$mail,$carts) {
+                    Mail::send('fe.email',compact('name','mail','carts','total','orderCode'),function ($email) use ($total, $name,$mail,$carts,$orderCode) {
                         $email->subject('Thông báo đơn hàng');
-                        $email->to($mail,$name,$carts,$total);
+                        $email->to($mail,$name,$carts,$total,$orderCode);
                     });
                 }
                 $request->session()->pull(self::CART_KEY);

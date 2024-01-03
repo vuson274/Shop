@@ -25,10 +25,13 @@ class ProductController extends Controller implements ICRUD
 
     public function add(Request $request)
     {
-        // $request->validate([
-        //                        'name'=>'required|min:6',
-        //                        'price'=>'required|numeric'
-        //                    ]);
+        $request->validate([
+           'name'=>'required',
+           'origin'=>'required',
+           'price'=>'required|numeric',
+           'quantity'=>'required|numeric',
+           'content'=>'required'
+       ]);
         try {
             $data = $request->all();
             unset($data['_token']);

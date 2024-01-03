@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table){
-            $table->string('name');
-            $table->string('phone');
-            $table->string('address');
-            $table->tinyInteger('method'); //1 COD 2 tt truc tuyen
-            $table->tinyInteger('status'); //1 đang đóng gói 2 đang giao hàng 3 đã nhận hàng 4 da huy
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->String('title');
+            $table->String('image');
+            $table->longText('content');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('posts');
     }
 };

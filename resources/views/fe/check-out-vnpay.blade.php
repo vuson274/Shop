@@ -2,7 +2,7 @@
 @section('content_web')
 <div>
     @if(\Illuminate\Support\Facades\Session::has('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="z-index: 3; position: absolute; top: 20%;">
         <strong>Success!</strong>{{\Illuminate\Support\Facades\Session::get('error')}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>

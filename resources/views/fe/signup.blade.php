@@ -23,15 +23,17 @@
 <body>
 <section>
     <img src="{{asset('/web/images/img.jpg')}}" class="bg" alt="">
-{{--    <div class="toast show" th:if="${noti}" >--}}
-{{--        <div class="toast-header">--}}
-{{--            <strong class="me-auto" th:text="${noti}"></strong>--}}
-{{--            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>--}}
-{{--        </div>--}}
-{{--        <div class="toast-body">--}}
-{{--            <a th:href="@{/home}">Trở về trang chủ</a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    @if(\Illuminate\Support\Facades\Session::has('success'))
+    <div class="toast show">
+        <div class="toast-header">
+            <strong class="me-auto">{{\Illuminate\Support\Facades\Session::get('success')}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            <a href="{{route('home')}}">Trở về trang chủ</a>
+        </div>
+    </div>
+    @endif
     @if(\Illuminate\Support\Facades\Session::has('error'))
         <div class="toast show" >
             <div class="toast-header">
@@ -39,7 +41,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
             </div>
             <div class="toast-body">
-                <a th:href="@{/home}">Trở về trang chủ</a>
+                <a href="{{route('home')}}">Trở về trang chủ</a>
             </div>
         </div>
     @endif

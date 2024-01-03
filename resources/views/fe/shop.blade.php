@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb__links">
-                            <a th:href="@{/home}"><i class="fa fa-home"></i>Trang chủ</a>
+                            <a href="{{route("home")}}"><i class="fa fa-home"></i>Trang chủ</a>
                             <span>Cửa hàng</span>
                         </div>
                     </div>

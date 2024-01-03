@@ -14,11 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table){
-            $table->string('name');
-            $table->string('phone');
-            $table->string('address');
-            $table->tinyInteger('method'); //1 COD 2 tt truc tuyen
-            $table->tinyInteger('status'); //1 đang đóng gói 2 đang giao hàng 3 đã nhận hàng 4 da huy
+            $table->string('order_code');
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('orders', function (Blueprint $table){
+            $table->dropColumn('order_code');
+        });
     }
 };

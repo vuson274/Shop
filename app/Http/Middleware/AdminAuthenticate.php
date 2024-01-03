@@ -17,7 +17,7 @@ class AdminAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()){
+        if (Auth::check() && Auth::user()->level == 1){
             return $next($request);
         }
         return redirect()->route('login');

@@ -48,9 +48,11 @@
         <form action="{{route('login-user')}}" method="post">
             @csrf
             <div class="inputBox">
+                <p style="color: #e2e8f0">@error('email'){{$message}}@enderror</p>
                 <input type="email" id="email"   placeholder="Email" name="email" required>
             </div>
             <div class="inputBox">
+                <p style="color: #e2e8f0">@error('email'){{$message}}@enderror</p>
                 <input type="password" id="password"  name="password" placeholder="Password" required>
             </div>
             <div class="inputBox">

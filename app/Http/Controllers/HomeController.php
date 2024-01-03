@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\Post;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,7 +41,7 @@ class HomeController extends Controller
     }
     public function shop(){
         $categories = Category::all();
-        $products = Product::orderBy('id','desc')->paginate(3);
+        $products = Product::orderBy('id','desc')->paginate(9);
         return view('fe.shop',compact('categories','products'));
     }
     public function contact(){
@@ -52,6 +54,9 @@ class HomeController extends Controller
         return view('fe.signup');
     }
 
+    public function profile(){
+        return view('fe.my-profile');
+    }
     public function editProfile(){
         $data = Auth::user();
         return view('fe.edit-profile', compact('data'));
@@ -71,5 +76,22 @@ class HomeController extends Controller
 
     public function warranty(){
         return view('fe.warranty');
+    }
+
+    public function myOrder(){
+        $id = Auth::user()->id;
+        $myOrder = Order::orderBy('id','DESC')->where('user_id',$id)->get();
+        return view('fe.my-order', compact('myOrder'));
+    }
+
+    public function blog(){
+        $blog = Post::orderBy('id','DESC')->paginate(6);
+        return view('fe.blog', compact('blog'));
+    }
+
+    public function blogDetail($id){
+        $post = Post::find($id);
+        $listNews = Post::orderBy('id','DESC')->limit(3)->get();
+        return view('fe.blog-detail', compact('post','listNews'));
     }
 }

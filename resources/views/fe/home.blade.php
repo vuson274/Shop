@@ -1,14 +1,12 @@
 @extends('fe.layout')
 @section('content_web')
     <div class="home">
-{{--        <div class="alert alert-success alert-dismissible" th:if="${message}">--}}
-{{--            <button type="button" class="close" data-dismiss="alert">&times;</button>--}}
-{{--            <strong th:text="${message}"></strong>--}}
-{{--        </div>--}}
-{{--        <div class="alert alert-danger alert-dismissible" th:if="${messageError}">--}}
-{{--            <button type="button" class="close" data-dismiss="alert">&times;</button>--}}
-{{--            <strong th:text="${messageError}"></strong>--}}
-{{--        </div>--}}
+        @if(\Illuminate\Support\Facades\Session::has('success'))
+        <div class="alert alert-success alert-dismissible" style="position: absolute; top: 30%; width: 20%; z-index: 40">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{\Illuminate\Support\Facades\Session::get('success')}}</strong>
+        </div>
+        @endif
         <section class="banner1">
             <img src="{{asset('/web/images/bg1.jpg')}}" id="bg">
             <img src="{{asset('/web/images/moon.png')}}" id="moon">
@@ -41,7 +39,7 @@
                             <div class="product__item__pic set-bg" data-id="{{$product->id}}" data-setbg="{{asset($product->main_image)}}">
                                 <ul class="product__hover">
                                     <li><a href="#detail" data-toggle="modal" data-target="#detail" class="detail" id="{{$product->id}}"><span class="fa fa-eye"></span></a></li>
-                                    <li><a  class="heart" id="{{$product->id}}"><span class="icon_heart_alt"></span></a></li>
+                                    <li><a  href="#heart" class="heart" id="{{$product->id}}"><span class="icon_heart_alt"></span></a></li>
                                     <li><a href="#order" class="order" id="{{$product->id}}"><span class="icon_bag_alt" type="buy"></span></a></li>
                                 </ul>
                             </div>
@@ -49,7 +47,6 @@
                                 <h6>
                                     <a href="{{route('product',['id'=>$product->id])}}">{{$product->name}}</a>
                                 </h6>
-{{--                                <div class="product__price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + đ"></div>--}}
                                 <div class="product__price">{{number_format($product->price, 0) }} đ</div>
                             </div>
                         </div>
@@ -58,10 +55,13 @@
                 </div>
             </div>
 {{--            <!-- Phân trang  -->--}}
-            <div class="col-lg-12 text-center">
-                <div class="pagination__option">
-                    <a  th:each="i: ${#numbers.sequence( 0, page,1)}" th:text="${i+1}" class="page" th:id="${i}" th:href="@{'/home?p='+${i}}"></a>
-                </div>
+{{--            <div class="col-lg-12 text-center">--}}
+{{--                <div class="pagination__option">--}}
+{{--                    <a  th:each="i: ${#numbers.sequence( 0, page,1)}" th:text="${i+1}" class="page" th:id="${i}" th:href="@{'/home?p='+${i}}"></a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+            <div style="display:flex; justify-content: center;">
+                {{$products->links()}}
             </div>
 
         </section>

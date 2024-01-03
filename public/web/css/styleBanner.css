@@ -74,6 +74,7 @@
     position: absolute;
     display: none;
 }
+
 .header__right__widget li:hover>ul{
     color: #fff;
     display: block;
@@ -81,7 +82,9 @@
 
 .header__right__widget li:hover>ul li{
     color: #fff;
-    display: block;
+    display: flex;
+    justify-content: left;
+
 }
 .header__right__widget li:hover>ul li a{
     color: #fff;

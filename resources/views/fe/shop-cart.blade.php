@@ -82,7 +82,7 @@
                 </div>
             </div>
             @else
-            <div class="container" if="${session.myCartItems == null}">
+            <div class="container">
                 <div class="col-md-6 offset-md-3">
                     <div class="noti_listProduct">
                         <h4>Giỏ hàng trống</h4>

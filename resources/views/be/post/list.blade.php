@@ -1,9 +1,9 @@
 @extends('be.layout')
 @section('content')
     <div class="col-lg-12">
-        <h2>SẢN PHẨM</h2>
+        <h2>BÀI VIẾT</h2>
         <div class="text-right" >
-            <a class="btn btn-success" href="{{route('admin.product.doAdd')}}">Thêm</a>
+            <a class="btn btn-success" href="{{route('admin.post.create')}}">Thêm</a>
         </div>
         <div><hr></div>
         <div class="table-responsive">
@@ -11,10 +11,8 @@
                 <thead class="table">
                 <tr>
                     <th>Id</th>
-                    <th>Tên</th>
+                    <th>Tên bài viết</th>
                     <th>Ảnh</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
                     <th>Thao tác</th>
                 </tr>
                 </thead>
@@ -22,15 +20,13 @@
                 @foreach($list as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->name}}</td>
+                        <td>{{$item->title}}</td>
                         <td>
-                            <img width="100px" src="{{asset($item->main_image)}}">
+                            <img src="{{asset($item->image)}}" width="100px">
                         </td>
-                        <td>{{$item->quantity}}</td>
-                        <td>{{ number_format($item->price, 0) }}</td>
                         <td>
-                            <a class="btn btn-warning" href="{{route('admin.product.doEdit',['id'=>$item->id])}}">Sửa</a>
-                            <a class="btn btn-danger" href="{{route('admin.product.delete',['id'=>$item->id])}}" onclick="return confirm('Bạn có muốn xoá ?')">Xóa</a>
+                            <a class="btn btn-warning" href="{{route('admin.post.doEdit', ['id'=>$item->id])}}">Sửa</a>
+                            <a class="btn btn-danger" href="{{route('admin.post.delete',['id'=>$item->id])}}" onclick="return confirm('Bạn có muốn xoá ?')">Xóa</a>
                         </td>
                     </tr>
                 @endforeach

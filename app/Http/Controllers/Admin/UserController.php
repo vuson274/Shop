@@ -17,6 +17,12 @@ class UserController extends Controller implements ICRUD
 
     public function add(Request $request)
     {
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email',
+            'password'=>'required|min:6',
+            'phone'=>'required|numeric'
+        ]);
         try {
             $data = $request->all();
             unset($data['_token']);

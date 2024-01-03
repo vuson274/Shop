@@ -44,23 +44,23 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="">Tên</label> <span id="errorname"></span>
+                                <label for="">Tên</label><span id="errorname">@error('name'){{$message}}@enderror</span>
                                 <input type="text" class="form-control"  id="name" name="name"   value="" onblur="checkname()"; Required />
                             </div>
 
                             <div class="form-group">
-                                <label for="">Email</label> <span id="erroremail"></span>
+                                <label for="">Email</label> <span id="erroremail">@error('email'){{$message}}@enderror</span>
                                 <input type="text" class="form-control"  id="email" name="email"  value="" onblur="checkEmail();" Required>
                             </div>
 
 
                             <div class="form-group">
-                                <label for="">password</label> <span id="errorpassword"></span>
+                                <label for="">password</label> <span id="errorpassword">@error('password'){{$message}}@enderror</span>
                                 <input type="password" class="form-control" id="password" name="password"   value="" onblur="checkPass();" Required>
                             </div>
 
                             <div class="form-group">
-                                <label for="">phone</label> <span id="errorphone"></span>
+                                <label for="">phone</label> <span id="errorphone">@error('phone'){{$message}}@enderror</span>
                                 <input type="number" class="form-control" id="phone" name="phone" value="" onblur="checkPhone();" Required>
                             </div>
 

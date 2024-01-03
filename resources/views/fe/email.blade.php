@@ -20,6 +20,7 @@
     <p>Cảm ơn quý khách đã tin tưởng sản phẩm của MoonLight.<br>
         Rất mong quý khách sẽ có những trải nghiệm tuyệt vời cùng với những sản phẩm của MoonLight</p>
     <p>Thông tin đơn hàng: </p>
+    <p>Mã đơn hàng: {{$orderCode}}</p>
     <div class="row">
         <div class="col-md-12">
             <table class="table">

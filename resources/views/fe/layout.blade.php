@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="offcanvas__auth">
-        <a th:href="@{/login}">Login</a>
+        <a href="{{route('signin')}}">Login</a>
     </div>
 </div>
 <!-- Header Section Begin -->
@@ -65,7 +65,7 @@
         <div class="row" w>
             <div class="col-xl-3 col-lg-2">
                 <div class="header__logo">
-                    <a th:href="@{/home}"><img style="width: 200px" src="{{asset('/web/images/logo1.png')}}"
+                    <a href="{{route('home')}}"><img style="width: 200px" src="{{asset('/web/images/logo1.png')}}"
                                                alt=""></a>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                     <ul>
                         <li><a href="{{route('home')}}">Trang chủ</a></li>
                         <li><a href={{route('shop')}}>Cửa hàng</a></li>
-                        <li><a href="@{/blog}">Bài viết</a></li>
+                        <li><a href={{route('blog')}}>Bài viết</a></li>
                         <li><a href={{route('contact')}}>Liên hệ</a></li>
                         <li><a href="{{route('warranty')}}">Bảo hành</a></li>
                     </ul>
@@ -82,7 +82,7 @@
             </div>
             <div class="col-lg-3" style="padding: 0; margin: 0">
                 <div class="header__right">
-                    @if(!\Illuminate\Support\Facades\Auth::check())
+                    @if(!\Illuminate\Support\Facades\Auth::check() or \Illuminate\Support\Facades\Auth::user()->level !=2)
                         <div class="header__right__auth">
                             <a href="{{route('signin')}}"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
@@ -90,11 +90,12 @@
                         </div>
                     @endif
                     <ul class="header__right__widget">
-                        @if(\Illuminate\Support\Facades\Auth::check())
+                        @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->level==2)
                             <li>
                                 <a href="#" style="color: #fff;">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
                                 <ul>
-                                    <li><a href="{{route('edit-profile')}}">Hồ sơ</a></li>
+                                    <li><a href="{{route('profile')}}">Hồ sơ</a></li>
+                                    <li><a href="{{route('my-order')}}">Đơn hàng</a></li>
                                     <li><a href="{{route('logout-user')}}" onclick ="return confirm ('bạn có thật sự muốn đăng xuất?');">Đăng xuất</a></li>
                                 </ul>
                             </li>
@@ -103,9 +104,11 @@
                             <span class="icon_search search-switch"></span>
                         </li>
                         <li>
-                            <a th:href="@{/favoriteList}"><span class="icon_heart_alt" style="color: #fff"></span>
+                            <a href="{{route('favorite-list')}}"><span class="icon_heart_alt" style="color: #fff"></span>
                                 <div id="heart">
-                                    <div class="tip" id="like"  if="${session.myLikeItems}" text="${session.myLikeNum}"></div>
+                                    @if(session('HEART'))
+                                    <div class="tip" id="like"> {{count(session('HEART'))}}</div>
+                                    @endif
                                 </div>
                             </a>
                         </li>
@@ -113,14 +116,11 @@
                             <a href="{{route('shop-cart')}}">
                                 <span class="icon_bag_alt" style="color: #fff"></span>
                                 <div id="carts">
+                                    @if(session('CART'))
                                     <div class="tip" id="bag-carts">
-                                        @if(session('CART'))
-                                            {{count(session('CART'))}}
-                                        @else
-                                            0
-                                        @endif
-
+                                        {{count(session('CART'))}}
                                     </div>
+                                    @endif
                                 </div>
                             </a>
                         </li>
@@ -134,12 +134,12 @@
     </div>
     </div>
 </header>
-{{--<section class="favorite_list">--}}
-{{--    <div class="notiProduct-item addCart-alert-animate">--}}
-{{--        <p>Đã thêm vào danh sách yêu thích </p>--}}
-{{--        <a th:href="@{/favoriteList}" class="btn-hover-dark">Xem danh sách</a>--}}
-{{--    </div>--}}
-{{--</section>--}}
+<section class="favorite_list">
+    <div class="notiProduct-item addCart-alert-animate">
+        <p>Đã thêm vào danh sách yêu thích </p>
+        <a href="{{route('favorite-list')}}" class="btn-hover-dark">Xem danh sách</a>
+    </div>
+</section>
 <section class="notiProduct">
     <div class="notiProduct-item addCart-alert-animate">
         <p>Đã thêm vào giỏ hàng!</p>
@@ -365,5 +365,44 @@
             });
         });
     </script>
+    <script>
+        $(document).on('click','.heart', function (e){
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('api.heart.add') }}",
+                method: "get",
+                data: {
+                    id: id,
+                },
+                success: function (response) {
+                    $("#heart").load(' #like');
+                    $('.favorite_list').slideDown('fast');
+                    $('.favorite_list').delay(2000).slideUp('fast');
+                },
+            });
+        });
+    </script>
+<script>
+    $(document).on('click','.delete', function (e){
+        var id = $(this).attr('id');
+        $.ajax({
+            url: "{{ route('api.heart.delete') }}",
+            method: "get",
+            data: {
+                id: id,
+            },
+            success: function (response) {
+                $("#heart").load(' #like');
+                $('body').load('/favorite')
+            },
+        });
+    });
+</script>
+<script>
+    $(document).on('click','.detail',function(e){
+        var id = $(this).attr('id');
+        alert(1);
+    });
+</script>
 </body>
 </html>
