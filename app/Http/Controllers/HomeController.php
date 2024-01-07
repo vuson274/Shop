@@ -94,4 +94,7 @@ class HomeController extends Controller
         $listNews = Post::orderBy('id','DESC')->limit(3)->get();
         return view('fe.blog-detail', compact('post','listNews'));
     }
+    public function quickView (Request $request){
+        $product = Product::find($request->id);
+    }
 }

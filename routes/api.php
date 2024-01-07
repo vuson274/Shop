@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\HeartController;
+use App\Http\Controllers\Api\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,4 @@ Route::get('/delete',[CartController::class,'deleteItemCart'])->name('api.cart.d
 Route::get('/update',[CartController::class,'update'])->name('api.cart.update');
 Route::get('/heart',[HeartController::class,'addHeart'])->name('api.heart.add');
 Route::get('/heart-delete',[HeartController::class,'deHeart'])->name('api.heart.delete');
+Route::get('/quick-view',[ViewController::class,'quickView'])->name('api.view.product');

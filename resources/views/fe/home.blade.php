@@ -186,7 +186,7 @@
                                 <div class="col-md-6" id="imgDetail">
                                     <img src="" alt="">
                                 </div>
-                                <div class="col-md-6" style="text-align: center;">
+                                <div class="col-md-6" style="text-align: left;">
                                     <h3></h3><br>
                                     <div class="proDes"></div>
                                     <h4></h4><br>

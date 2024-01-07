@@ -401,7 +401,21 @@
 <script>
     $(document).on('click','.detail',function(e){
         var id = $(this).attr('id');
-        alert(1);
+        $.ajax({
+            url: "{{route('api.view.product')}}",
+            method: "get",
+            data: {
+                id: id,
+            },
+            success: function (data) {
+                var name= data.name;
+            $('#imgDetail').html('<img src="http://127.0.0.1:8000/'+data.main_image+'">');
+            $('.modal-body .proDes').html(data.content);
+            $('.modal-body h3').html(name);
+            $('.modal-body h4').html(Number(data.price).toLocaleString('en')+"đ");
+            $('.modal-body a').attr('id',data.id);
+            },
+        });
     });
 </script>
 </body>
