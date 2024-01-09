@@ -14,6 +14,7 @@
                     <th>Tên</th>
                     <th>Email</th>
                     <th>Số điện thoại</th>
+                    <th>Loại tài khoản</th>
                     <th>Thao tác</th>
                 </tr>
                 </thead>
@@ -24,6 +25,13 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->email}}</td>
                     <td>{{$item->phone}}</td>
+                    <td>
+                        @if($item->level == 1)
+                            Quản trị viên
+                        @else
+                            Người dùng
+                        @endif
+                    </td>
                     <td>
                         <button array="{{$item}}" id="{{$item->id}}" class="edituser btn btn-warning">Sửa</button>
                         <a class="btn btn-danger" href="{{route('admin.user.delete',['id'=>$item->id])}}" onclick="return confirm('Bạn có muốn xoá ?')">Xóa</a>
