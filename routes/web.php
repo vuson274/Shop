@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 require_once __DIR__.'/be.php';
+require_once __DIR__.'/fe.php';

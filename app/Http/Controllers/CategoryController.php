@@ -47,4 +47,5 @@ class CategoryController extends Controller
         }
         return redirect()->back()->with('success','Xóa thành công');
     }
+
 }

@@ -3,7 +3,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodController;
-Route::prefix('/admin')->group(function (){
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\LoginController;
+Route::prefix('/admin')->middleware(\App\Http\Middleware\AdminAuthencate::class)->group(function (){
     Route::prefix('/user')->group(function (){
         Route::get('/',[UserController::class,'list'])->name('admin.user.list');
         Route::post('/add',[UserController::class,'add'])->name('admin.user.add');
@@ -24,5 +26,11 @@ Route::prefix('/admin')->group(function (){
         Route::post('/edit',[FoodController::class, 'edit'])->name('admin.food.edit');
         Route::get('/delete/{id}', [FoodController::class,'delete'])->name('admin.food.delete');
     });
-})
+    Route::prefix('/order')->group(function (){
+        Route::get('/order',[OrderController::class,'list'])->name('admin.order.list');
+    });
+});
+Route::get('login', [LoginController::class,'viewLogin'])->name('view.login');
+Route::post('login',[LoginController::class,'doLogin'])->name('admin.login');
+Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 ?>
